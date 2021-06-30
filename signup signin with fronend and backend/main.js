@@ -11,7 +11,15 @@ function mysigninfunct(e){
     };
     console.log(signinInfo);
     axios.post('http://localhost:7000/user/signin',signinInfo).then(result=>{
-        showNotification(result.data.message,result.success);
+        console.log(result.data.message);
+        console.log(result.data.success);
+        //showNotification(result.data.message,!(result.data.success));
+        localStorage.setItem('token', result.data.token);
+        console.log(window.location.href);
+        if(result.data.success==true){
+            console.log("hiiiiiiiiiiiiiii");
+            window.location.href="home.html"
+        }
         
 }).catch(err=>{
     showNotification('Fail to login',true);

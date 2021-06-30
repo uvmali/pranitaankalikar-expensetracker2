@@ -9,7 +9,7 @@
 
   function generateAccessToken(id) {
     console.log(process.env.TOKEN_SECRET);
-    return jwt.sign(id,'pranitaAnkalikar');
+    return jwt.sign(id,process.env.TOKEN_SECRET);
   };
 
   exports.postSignin = (req, res, next) => {

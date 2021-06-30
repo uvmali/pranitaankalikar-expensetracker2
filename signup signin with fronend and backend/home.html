@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title> Daily Expense </title>
+      <link rel="stylesheet" href="style.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="./home.js" defer></script>
+   </head>
+   <body>
+      <div class="wrapper">
+         <div class="title-text">
+            <div class="title login">
+               Add Expense
+            </div>
+         </div>
+            <div class="form-inner">
+               <form>
+                  <div class="field">
+                     <label for="amount">expense amount</label>
+                     <input type="number" id="amount" placeholder="add here expense amount">
+                  </div><br>
+                  <div class="field">
+                     <label for="description">Description</label>
+                     <input type="text" id="description" placeholder="add here expense description">
+                  </div><br>
+                  <div class="field">
+                     <label for="category">Choose a category</label><br>
+                     <select name="category" class="category" id="category">
+                        <option value="food">Food</option>
+                        <option value="fuel">Fuel</option>
+                        <option value="travel">Travel</option>
+                        <option value="grocery">Grocery</option>
+                        <option value="other">Other</option>
+                     </select>
+                  </div><br><br>
+                  <div class="field btn">
+                     <div class="btn-layer"></div>
+                     <input type="submit" id="addexpencebtn" value="Add Expence">
+                  </div>
+                  
+               </form>
+               
+            </div>
+      </div>
+      
+      
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   </body>
+</html>
