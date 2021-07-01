@@ -2,6 +2,7 @@ const subtn= document.getElementById("subtn");
 const signinbtn= document.getElementById("signinbtn");
 signinbtn.addEventListener("click",mysigninfunct);
 subtn.addEventListener("click",mysignup);
+
 function mysigninfunct(e){
     console.log('this is signin');
     e.preventDefault();
@@ -10,20 +11,22 @@ function mysigninfunct(e){
         password: document.getElementById("sipassword").value
     };
     console.log(signinInfo);
-    axios.post('http://localhost:7000/user/signin',signinInfo).then(result=>{
+    axios.post('http://localhost:7000/user/signin',signinInfo)
+    .then(result=>{
         console.log(result.data.message);
         console.log(result.data.success);
         //showNotification(result.data.message,!(result.data.success));
-        localStorage.setItem('token', result.data.token);
-        console.log(window.location.href);
+        //localStorage.setItem('token', result.data.token);
         if(result.data.success==true){
-            console.log("hiiiiiiiiiiiiiii");
-            window.location.href="home.html"
+                console.log('helllo');
+                document.location.href="home.html";
         }
-        
-}).catch(err=>{
-    showNotification('Fail to login',true);
-});
+        localStorage.setItem('token', result.data.token);
+    })
+    .catch((err)=>{
+        console.log(err);
+        showNotification('Fail to login',true);
+    });
     document.querySelectorAll('form')[0].reset();
 
 };

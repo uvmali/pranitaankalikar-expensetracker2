@@ -7,7 +7,8 @@ var cors = require('cors');
 
 //const errorController = require('./controllers/error');
 const sequelize = require('./util/database');
-//const User = require('./models/user');
+const User=require('./models/user');
+const Expense=require('./models/expense');
 
 
 const userRoutes = require('./routes/user');
@@ -26,6 +27,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //console.log(require('crypto').randomBytes(64).toString('hex'));
 app.use('/user', userRoutes);
+
+Expense.belongsTo(User,{constraints:true,onDelete:'CASCADE'});
+User.hasMany(Expense);
 
 
 sequelize.sync()

@@ -1,6 +1,7 @@
 
   const bcrypt = require('bcrypt');
   const User = require('../models/user');
+  const Expense = require('../models/expense');
   const sequelize = require('../util/database');
   const jwt = require('jsonwebtoken');
   const dotenv = require('dotenv');
@@ -8,7 +9,7 @@
   dotenv.config();
 
   function generateAccessToken(id) {
-    console.log(process.env.TOKEN_SECRET);
+    //console.log(process.env.TOKEN_SECRET);
     return jwt.sign(id,process.env.TOKEN_SECRET);
   };
 
@@ -17,6 +18,7 @@
     //res.send("hiiiiiiiiiiiiii");
     //console.log(req.body);
     const {email,password}=req.body;
+    console.log(req.body);
     User.findAll({where:{email}}).then((users)=>{
       if(users.length>0){
         bcrypt.compare(password,users[0].password,function(err,response){
@@ -61,3 +63,40 @@
  
    
   };
+
+  exports.authenticate = (req, res, next) => {
+    
+    //console.log(req.header('authorization'));
+    try{
+      const token =req.header('authorization');
+      //console.log(token);
+      const userid=Number(jwt.verify(token,process.env.TOKEN_SECRET));
+      //console.log(userid);
+      User.findAll({ where: { id: userid } }).then(users=>{
+        const user=users[0];
+        //console.log(user);
+        //console.log(JSON.stringify(user));
+        req.user=user;
+       
+        next();
+      }).catch((err)=>{throw new Error(err)});
+    }
+    catch(err){
+      console.log(err);
+      return res.status(401).json({success:false});
+
+    };   
+  };
+
+  exports.postaddexpense = (req, res, next) => {
+    console.log(req.body);
+    
+    const {amount,description,category}=req.body;
+    //console.log(typeof(amount));
+    req.user.createExpense({amount,description,category}).then((expense)=> {
+      return res.status(201).json({expense, success:true});
+    }).catch((err)=>{
+      return res.status(402).json({success:false,error:err});
+    })
+  };
+
