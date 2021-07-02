@@ -14,5 +14,8 @@ router.post('/signup', userController.postSignup);
 
 router.post('/addexpense',userController.authenticate, userController.postaddexpense);
 
+router.get('/getexpenses', userController.authenticate, userController.getexpenses )
+
+router.delete('/deleteexpense/:expenseid', userController.authenticate, userController.deleteexpense)
 
 module.exports = router;

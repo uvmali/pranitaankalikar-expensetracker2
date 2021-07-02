@@ -204,3 +204,24 @@ form .btn input[type="submit"]{
 .notification h4 span{
   color:rgb(235, 33, 33);
 }
+.mybtn{
+  margin-left: auto;
+}
+#rzp-button1{
+  height: 44px;
+    width: 126px;
+    background: #14abce;
+    border-radius: 13px;
+}
+#listOfExpenses{
+  width: auto;
+}
+
+#deletebtn{
+  height: 34px;
+    width: 126px;
+    background: #da2e45;
+    border-radius: 13px;
+
+}
+
