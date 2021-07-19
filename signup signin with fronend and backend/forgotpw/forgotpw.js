@@ -6,7 +6,10 @@ function forgotpwbtnfunct(e){
         email:document.getElementById('email').value
     }
     console.log(forgotpwInfo);
-    axios.post('http://localhost:7000/password/forgot',forgotpwInfo);
+    axios.post('http://localhost:7000/password/forgot',forgotpwInfo).then(result=>{
+        console.log(result);
+        document.querySelector('form').reset();
+    });
 
     
 

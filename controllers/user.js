@@ -101,9 +101,9 @@
   };
 
   exports.getexpenses = (req, res)=> {
-    
+    //console.log(req.user.ispremiumuser);
     req.user.getExpenses().then(expenses => {
-        return res.status(200).json({expenses, success: true})
+        return res.status(200).json({expenses,ispremiumuser:req.user.ispremiumuser, success: true})
     })
     .catch(err => {
         return res.status(402).json({ error: err, success: false})

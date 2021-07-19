@@ -1,6 +1,7 @@
 const token=localStorage.getItem('token');
 document.getElementById('addexpencebtn').addEventListener("click",myfuction);
 
+
 function myfuction(e){
     
     const a=Number(document.getElementById("amount").value);
@@ -19,7 +20,8 @@ function myfuction(e){
         
         axios.post('http://localhost:7000/user/addexpense',addExpenseInfo,{ headers:{"Authorization":token}}).then(result=>{
             console.log('added successfully');
-            addNewExpenseto(addExpenseInfo);
+            //console.log(result.data.expense);
+            addNewExpenseto(result.data.expense);
             //console.log(document.querySelector('form'))
             document.querySelector('form').reset();
 
@@ -32,6 +34,11 @@ function myfuction(e){
 window.addEventListener('load', ()=> {
     axios.get('http://localhost:7000/user/getexpenses', { headers: {"Authorization" : token} }).then(response => {
         if(response.status === 200){
+            //console.log(response.data.ispremiumuser);
+            if(response.data.ispremiumuser==true){
+                document.getElementById('body').style.background='-webkit-linear-gradient(left, #727175, #1f161a)';
+
+            }
            
             response.data.expenses.forEach(element => {
                 addNewExpenseto(element);
@@ -103,7 +110,8 @@ document.getElementById('rzp-button1').onclick = async function (e) {
              order_id: options.order_id,
              payment_id: response.razorpay_payment_id,
          }, { headers: {"Authorization" : token} }).then(() => {
-             alert('You are a Premium User Now')
+             alert('You are a Premium User Now');
+             document.getElementById('body').style.background='-webkit-linear-gradient(left, #727175, #1f161a)';
          }).catch(() => {
              alert('Something went wrong. Try Again!!!')
          })
@@ -123,3 +131,4 @@ document.getElementById('rzp-button1').onclick = async function (e) {
   alert(response.error.metadata.payment_id);
  });
 }
+
